@@ -10,6 +10,7 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
+use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -62,6 +63,8 @@ class FilamentXtermServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
+        Livewire::component('clock-widget', FilamentXterm::class);
+
         // Asset Registration
         FilamentAsset::register(
             $this->getAssets(),
@@ -84,9 +87,6 @@ class FilamentXtermServiceProvider extends PackageServiceProvider
                 ], 'filament-xterm-stubs');
             }
         }
-
-        // Testing
-        Testable::mixin(new TestsFilamentXterm);
     }
 
     protected function getAssetPackageName(): ?string
@@ -100,9 +100,9 @@ class FilamentXtermServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
-            // AlpineComponent::make('filament-xterm', __DIR__ . '/../resources/dist/components/filament-xterm.js'),
-            Css::make('filament-xterm-styles', __DIR__ . '/../resources/dist/filament-xterm.css'),
-            Js::make('filament-xterm-scripts', __DIR__ . '/../resources/dist/filament-xterm.js'),
+            AlpineComponent::make('filament-xterm', __DIR__ . '/../resources/dist/filament-xterm.js'),
+            Css::make('filament-xterm', __DIR__ . '/../resources/dist/filament-xterm.css'),
+            //            Js::make('filament-xterm-scripts', __DIR__ . '/../resources/dist/filament-xterm.js'),
         ];
     }
 

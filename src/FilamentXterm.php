@@ -2,4 +2,14 @@
 
 namespace TheThunderTurner\FilamentXterm;
 
-class FilamentXterm {}
+use Filament\Widgets\Widget;
+
+class FilamentXterm extends Widget
+{
+    public static string $view = 'filament-xterm::terminal-widget';
+
+    public function getColumnSpan(): int
+    {
+        return 2;
+    }
+}

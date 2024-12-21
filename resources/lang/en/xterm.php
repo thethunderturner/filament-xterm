@@ -1,6 +1,6 @@
 <?php
 
-// translations for TheThunderTurner/FilamentXterm
 return [
-    //
+    'title' => 'Terminal Widget',
+    'description' => 'A terminal widget for Filament.',
 ];
