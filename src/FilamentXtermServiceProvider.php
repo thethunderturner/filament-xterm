@@ -5,17 +5,14 @@ namespace TheThunderTurner\FilamentXterm;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
-use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
-use Livewire\Features\SupportTesting\Testable;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use TheThunderTurner\FilamentXterm\Commands\FilamentXtermCommand;
-use TheThunderTurner\FilamentXterm\Testing\TestsFilamentXterm;
 
 class FilamentXtermServiceProvider extends PackageServiceProvider
 {
@@ -63,7 +60,7 @@ class FilamentXtermServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
-        Livewire::component('filament-xterm', FilamentXterm::class);
+        Livewire::component('filament-xterm', FilamentXtermWidget::class);
 
         // Asset Registration
         FilamentAsset::register(

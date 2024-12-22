@@ -5,7 +5,7 @@ namespace TheThunderTurner\FilamentXterm;
 use Filament\Widgets\Widget;
 use Illuminate\Support\Facades\Process;
 
-class FilamentXterm extends Widget
+class FilamentXtermWidget extends Widget
 {
     public static string $view = 'filament-xterm::terminal-widget';
 

@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Facade;
  */
 class FilamentXterm extends Facade
 {
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
-        return \TheThunderTurner\FilamentXterm\FilamentXterm::class;
+        return \TheThunderTurner\FilamentXterm\FilamentXtermWidget::class;
     }
 }

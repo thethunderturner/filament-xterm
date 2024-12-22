@@ -1,4 +1,4 @@
-# This is a filament package the gives users the ability to access the terminal on the web
+# Filament Xterm
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/thethunderturner/filament-xterm.svg?style=flat-square)](https://packagist.org/packages/thethunderturner/filament-xterm)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/thethunderturner/filament-xterm/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/thethunderturner/filament-xterm/actions?query=workflow%3Arun-tests+branch%3Amain)
@@ -7,7 +7,10 @@
 
 
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+A filament plugin that gives you access to a terminal in your browser. It uses the [xterm.js](https://xtermjs.org/) library to create a terminal emulator in your browser.
+
+> [!CAUTION]
+> Please make sure the widget has proper permissions and is secure. This widget can be used to run commands on your server. Make sure you have proper security measures in place. Otherwise you might be at risk of being hacked and/or having your data compromised.
 
 ## Installation
 
@@ -15,13 +18,6 @@ You can install the package via composer:
 
 ```bash
 composer require thethunderturner/filament-xterm
-```
-
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="filament-xterm-migrations"
-php artisan migrate
 ```
 
 You can publish the config file with:
@@ -36,18 +32,16 @@ Optionally, you can publish the views using
 php artisan vendor:publish --tag="filament-xterm-views"
 ```
 
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
 ## Usage
 
+Simply add the widget to your page using the following code:
 ```php
-$filamentXterm = new TheThunderTurner\FilamentXterm();
-echo $filamentXterm->echoPhrase('Hello, TheThunderTurner!');
+protected function getHeaderWidgets(): array
+{
+    return [
+        \TheThunderTurner\FilamentXterm\FilamentXtermWidget::class,
+    ];
+}
 ```
 
 ## Testing
