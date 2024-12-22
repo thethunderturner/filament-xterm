@@ -3,6 +3,7 @@
 namespace TheThunderTurner\FilamentXterm;
 
 use Filament\Widgets\Widget;
+use Illuminate\Support\Facades\Process;
 
 class FilamentXterm extends Widget
 {
@@ -16,5 +17,16 @@ class FilamentXterm extends Widget
     public function hasTitle(): bool
     {
         return true;
+    }
+
+    public function executeCommand(string $command): array
+    {
+        $result = Process::run($command);
+
+        return [
+            'output' => $result->output(),
+            'error' => $result->errorOutput(),
+            'exitCode' => $result->exitCode(),
+        ];
     }
 }

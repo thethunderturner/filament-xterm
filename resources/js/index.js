@@ -4,10 +4,13 @@ import '@xterm/xterm/css/xterm.css';
 export default function xtermTerminal() {
     return {
         term: null,
+        currentCommand: '',
+
         init() {
             this.term = new Terminal({
                 fontSize: 13,
                 fontFamily: '"Menlo for Powerline", Menlo, Consolas, "Liberation Mono", Courier, monospace',
+                convertEol: true, // Enable proper line endings
                 theme: {
                     foreground: '#d2d2d2',
                     background: '#2b2b2b',
@@ -34,31 +37,39 @@ export default function xtermTerminal() {
             const terminalElement = this.$el;
             if (terminalElement) {
                 this.term.open(terminalElement);
-                this.term.write('$');
+                this.term.write('$ ');
 
-                // Enable local echo
                 this.term.onKey(({ key, domEvent }) => {
-                    // Handle enter key
-                    if (domEvent.keyCode === 13) {
-                        this.term.write('\r\n$ ');
+                    if (domEvent.keyCode === 13) { // Enter
+                        if (this.currentCommand.trim()) {
+                            this.$wire.executeCommand(this.currentCommand)
+                                .then(result => {
+                                    if (result.output) {
+                                        this.term.write(`\r\n${result.output}`);
+                                    }
+                                    if (result.error) {
+                                        this.term.write(`\r\n${result.error}`);
+                                    }
+                                    this.term.write('\r\n$ ');
+                                });
+                        } else {
+                            this.term.write('\r\n$ ');
+                        }
+                        this.currentCommand = '';
                     }
-                    // Handle backspace
-                    else if (domEvent.keyCode === 8) {
-                        // Move cursor backward and clear the character
-                        if (this.term._core.buffer.x > 2) {
+                    else if (domEvent.keyCode === 8) { // Backspace
+                        if (this.currentCommand.length > 0) {
+                            this.currentCommand = this.currentCommand.slice(0, -1);
                             this.term.write('\b \b');
                         }
                     }
-                    // Regular character input
-                    else {
+                    else { // Regular input
+                        this.currentCommand += key;
                         this.term.write(key);
                     }
                 });
 
-                // Focus the terminal
                 this.term.focus();
-            } else {
-                console.error('Terminal element not found.');
             }
         },
         destroy() {
