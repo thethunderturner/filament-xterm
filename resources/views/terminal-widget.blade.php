@@ -1,8 +1,14 @@
+@php
+$hasTitle = $this->hasTitle();
+@endphp
+
 <x-filament-widgets::widget>
     <x-filament::section>
-        <x-slot name="heading">
-            {{ __('filament-xterm::xterm.title') }}
-        </x-slot>
+        @if($hasTitle)
+            <x-slot name="heading">
+                {{ __('filament-xterm::xterm.title') }}
+            </x-slot>
+        @endif
 
         <div
             x-ignore
@@ -13,8 +19,6 @@
             style="height: 20rem;"
             wire:ignore
         >
-            <div id="xterm-terminal">
-            </div>
         </div>
     </x-filament::section>
 </x-filament-widgets::widget>

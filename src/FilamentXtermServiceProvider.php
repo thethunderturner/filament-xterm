@@ -63,7 +63,7 @@ class FilamentXtermServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
-        Livewire::component('clock-widget', FilamentXterm::class);
+        Livewire::component('filament-xterm', FilamentXterm::class);
 
         // Asset Registration
         FilamentAsset::register(

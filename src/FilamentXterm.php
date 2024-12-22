@@ -12,4 +12,9 @@ class FilamentXterm extends Widget
     {
         return 2;
     }
+
+    public function hasTitle(): bool
+    {
+        return true;
+    }
 }

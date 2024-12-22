@@ -31,10 +31,10 @@ export default function xtermTerminal() {
                 }
             });
 
-            const terminalElement = document.getElementById('xterm-terminal');
+            const terminalElement = this.$el;
             if (terminalElement) {
                 this.term.open(terminalElement);
-                this.term.write('Hello from xterm.js\r\n$ ');
+                this.term.write('$');
 
                 // Enable local echo
                 this.term.onKey(({ key, domEvent }) => {
